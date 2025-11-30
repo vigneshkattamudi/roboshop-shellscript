@@ -1,5 +1,6 @@
 #!/bin/bash
 
+START_TIME=$(date +%s)
 USERID=$(id -u)
 R="\e[31m"
 G="\e[32m"
@@ -51,6 +52,11 @@ systemctl restart mongod &>>$LOG_FILE
 VALIDATE $? "restarting mongodb"
 
 echo "MongoDB Setup Completed Successfully."
+
+END_TIME=$(date +%s)
+TOTAL_TIME=$(( $END_TIME - $START_TIME ))
+
+echo -e "Script exection completed successfully, $Y time taken: $TOTAL_TIME seconds $N" | tee -a $LOG_FILE
 
 # #!/bin/bash
 
